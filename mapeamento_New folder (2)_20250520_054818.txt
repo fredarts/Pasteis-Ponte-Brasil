@@ -1,0 +1,673 @@
+Mapeamento da Pasta: C:/Users/Fred/Desktop/New folder (2)
+Gerado em: 2025-05-20 05:48:18
+Diretórios Ignorados: .git
+================================================================================
+ESTRUTURA DA PASTA (excluindo ignorados)
+================================================================================
+
+New folder (2)/
+    css/
+    images/
+    js/
+    Mapping.py
+    index.html
+        style.css
+        Caixa_1_Unidade.png
+        Caixa_2_unidades.png
+        ChatGPT Image 20_05_2025, 04_08_48.png
+        Doce_de_Goiaba.png
+        Leite_Ninho.png
+        Maracuja.png
+        Morango_em_Calda.png
+        Pastel_de_Beijinho.png
+        Pastel_de_Brigadeiro.png
+        Pastel_de_Doce_de_Leite.png
+        Paçoquita.png
+        Tapioca.png
+        banner_01.png
+        gallery_01.png
+        gallery_02.png
+        gallery_03.png
+        gallery_04.png
+        gallery_05.png
+        gallery_06.png
+        logo.png
+        modules/
+        utils/
+        main.js
+            cart.js
+            menu.js
+            productCatalog.js
+            productModal.js
+            ui.js
+            whatsapp.js
+            domUtils.js
+
+================================================================================
+CONTEÚDO DOS ARQUIVOS (.css, .html, .js, .json)
+================================================================================
+
+================================================================================
+Arquivo: index.html
+Formato: .html
+================================================================================
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pastéis da Ponte Brasil</title>
+
+  <!-- Tailwind (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="font-sans bg-beige-50 scroll-smooth">
+
+<!-- Navbar -->
+<header class="fixed w-full top-0 z-50 bg-white shadow">
+  <div class="max-w-6xl mx-auto flex items-center justify-between p-4">
+    <div class="flex items-center space-x-2">
+      <img src="images/logo.png" alt="logo" class="w-10 h-10 object-contain" />
+      <span class="font-bold text-lg text-gray-800">Pastéis da Ponte</span>
+    </div>
+    <nav class="hidden sm:flex space-x-6 text-gray-700">
+      <a href="#galeria" class="hover:text-teal-600">Galeria</a>
+      <a href="#menu" class="hover:text-teal-600">Sabores</a>
+      <a href="#footer" class="hover:text-teal-600">Contato</a>
+    </nav>
+    <button id="cartBtn" class="relative px-4 py-2 bg-amber-500 text-white rounded hover:bg-amber-600 transition">
+      Carrinho <span id="cartCount" class="absolute -top-2 -right-2 bg-teal-600 rounded-full px-1.5 text-xs">0</span>
+    </button>
+  </div>
+</header>
+
+<div class="h-20"></div> <!-- spacer -->
+
+<!-- Hero Ken Burns -->
+<section class="kenburns relative h-[60vh] overflow-hidden">
+  <img src="images/banner_01.png" class="absolute w-full h-full object-cover" alt="Hero"/>
+  <div class="absolute inset-0 bg-black/40 flex flex-col items-center justify-center text-center text-white p-4">
+    <h1 class="text-4xl sm:text-5xl font-extrabold mb-4 drop-shadow">Doces Tradições, Alma Brasileira</h1>
+    <a href="#menu" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 rounded text-lg font-semibold">
+       Conferir Sabores
+    </a>
+  </div>
+</section>
+
+<!-- Galeria -->
+<section id="galeria" class="max-w-6xl mx-auto py-16 px-4">
+  <h2 class="text-3xl font-bold text-center mb-8">Momentos de Sabor</h2>
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+    <img src="images/gallery_01.png" class="w-full h-68 object-cover rounded"/>
+    <img src="images/gallery_02.png" class="w-full h-68 object-cover rounded"/>
+    <img src="images/gallery_03.png" class="w-full h-68 object-cover rounded"/>
+    <img src="images/gallery_04.png" class="w-full h-68 object-cover rounded"/>
+  </div>
+</section>
+
+<!-- Menu -->
+<section id="menu" class="bg-amber-50 py-16">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-10">Nosso Menu</h2>
+    <div id="menuGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Produtos serão inseridos aqui pelo JS -->
+    </div>
+  </div>
+</section>
+
+<!-- Tela Produto -->
+<section id="productView" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+  <div class="bg-white rounded-lg max-w-md w-full p-6 relative">
+    <button id="closeProductBtn" class="absolute top-2 right-2 text-xl text-gray-600 hover:text-gray-900">×</button>
+    <img id="productModalImg" class="w-full h-68 object-cover rounded mb-4" alt="Imagem do Produto">
+    <h3 id="productModalTitle" class="text-2xl font-bold mb-2"></h3>
+    <p id="productModalDesc" class="text-gray-700 mb-4"></p>
+    <div class="flex items-center space-x-3">
+      <label for="productModalQty">Qtd.:</label>
+      <input id="productModalQty" type="number" min="1" value="1" class="w-20 border px-2 py-1 rounded">
+      <button id="addProductToCartBtn" class="flex-1 bg-amber-500 hover:bg-amber-600 text-white rounded py-2">Adicionar</button>
+    </div>
+  </div>
+</section>
+
+<!-- Tela Carrinho -->
+<section id="cartView" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-50 overflow-auto p-4">
+  <div class="bg-white max-w-lg mx-auto rounded-lg shadow p-6 relative">
+    <button id="closeCartBtn" class="absolute top-2 right-3 text-2xl text-gray-600 hover:text-gray-900">×</button>
+    <h3 class="text-2xl font-bold mb-4">Seu Carrinho</h3>
+    <div id="cartItemsContainer" class="space-y-4">
+      <!-- Itens do carrinho serão inseridos aqui -->
+    </div>
+    <div class="flex justify-between items-center mt-4 border-t pt-4">
+      <span class="text-lg font-semibold">Total:</span>
+      <span id="cartTotal" class="text-xl font-bold text-amber-600">€0,00</span>
+    </div>
+    <button id="checkoutBtn" class="w-full mt-6 bg-teal-600 hover:bg-teal-700 text-white py-3 rounded text-lg">
+      Finalizar  • WhatsApp
+    </button>
+  </div>
+</section>
+
+<!-- CTA WhatsApp -->
+<div class="fixed bottom-6 right-6 z-40">
+  <a id="whatsappCtaBtn" target="_blank" class="flex items-center bg-green-600 hover:bg-green-700 text-white rounded-full px-5 py-3 shadow-lg">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 4.98 0 11.1c0 2.19.64 4.23 1.74 5.96L0 24l7.18-1.88c1.79.49 3.68.75 5.82.75 6.63 0 12-4.98 12-11.1C24 4.98 18.63 0 12 0zm0 20.2c-1.85 0-3.56-.3-5.07-.86l-.36-.14-3.17.83.85-3.09-.21-.32C3.21 15.21 2.4 13.2 2.4 11.1 2.4 6.25 6.68 2.4 12 2.4s9.6 3.85 9.6 8.7c0 4.75-4.28 8.7-9.6 8.7zm5.43-6.55c-.29-.14-1.71-.85-1.98-.95-.27-.1-.47-.14-.67.14-.19.28-.77.95-.94 1.14-.17.19-.34.21-.63.07-.29-.14-1.23-.45-2.35-1.45-.87-.77-1.46-1.72-1.63-2-.17-.28-.02-.43.13-.57.13-.13.29-.34.44-.52.15-.18.19-.31.29-.5.1-.19.05-.38-.02-.53-.07-.14-.63-1.53-.86-2.08-.23-.55-.46-.48-.67-.49-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.79.35-.27.28-1.03 1.01-1.03 2.45s1.06 2.84 1.21 3.04c.15.2 2.09 3.2 5.08 4.49.71.31 1.26.5 1.69.64.71.23 1.36.2 1.88.12.57-.09 1.71-.69 1.95-1.35.24-.66.24-1.23.17-1.35-.07-.12-.26-.19-.55-.33z"/></svg>
+    Peça pelo WhatsApp
+  </a>
+</div>
+
+<!-- Footer -->
+<footer id="footer" class="bg-gray-800 text-gray-200 py-10 mt-20">
+  <div class="max-w-6xl mx-auto px-4 text-center space-y-4">
+    <p>© 2025 Pastéis da Ponte Brasil – Amarante, PT</p>
+    <p class="text-sm">Design & Desenvolvimento por você 😉</p>
+  </div>
+</footer>
+
+<script src="js/main.js" type="module"></script>
+</body>
+</html>
+
+--------------------------------------------------------------------------------
+Fim do arquivo: index.html
+--------------------------------------------------------------------------------
+
+
+================================================================================
+Arquivo: css\style.css
+Formato: .css
+================================================================================
+
+/* css/style.css */
+@keyframes kenburns {
+  0%   {transform: scale(1) translate(-2%, -2%);}
+  100% {transform: scale(1.25) translate(2%, 2%);}
+}
+.kenburns img{
+  animation: kenburns 18s ease-in-out infinite alternate;
+}
+
+/* Adicione um estilo para esconder elementos inicialmente, se necessário */
+.hidden {
+  display: none;
+}
+
+--------------------------------------------------------------------------------
+Fim do arquivo: css\style.css
+--------------------------------------------------------------------------------
+
+
+================================================================================
+Arquivo: js\main.js
+Formato: .js
+================================================================================
+
+// js/main.js
+//--------------------------------------------------------------------
+//  Módulos
+//--------------------------------------------------------------------
+import { getAllProducts }                                                from './modules/productCatalog.js';
+import { renderMenu, initMenuEventListeners }                            from './modules/menu.js';
+import { initProductModal }                                              from './modules/productModal.js';
+import { initCart, updateCartIcon, onCartUpdate, getCartSummary }        from './modules/cart.js';
+import { initUIEventListeners }                                          from './modules/ui.js';
+import { generateWhatsAppMessage, updateWhatsAppLinks }                  from './modules/whatsapp.js';
+
+//--------------------------------------------------------------------
+//  Função principal
+//--------------------------------------------------------------------
+function initializeApp () {
+  /* 1 ▸ Produtos --------------------------------------------------- */
+  const products = getAllProducts();
+
+  /* 2 ▸ Menu (cards + click-handlers) ------------------------------ */
+  renderMenu(products);
+  initMenuEventListeners();         // add-to-cart + abrir modal
+
+  /* 3 ▸ Modal de Produto ------------------------------------------ */
+  initProductModal(products);       // preencher / abrir / fechar
+
+  /* 4 ▸ Carrinho --------------------------------------------------- */
+  initCart();                       // cria estrutura + lê localStorage
+  updateCartIcon();                 // nº de itens no sino 🛒
+
+  /* 5 ▸ UI genérica (abrir/fechar carrinho, etc.) ------------------ */
+  initUIEventListeners();
+
+  /* 6 ▸ WhatsApp --------------------------------------------------- */
+  syncWhatsAppLinks();              // primeira geração
+
+  // Sempre que o carrinho mudar → regenerar mensagem + atualizar links
+  onCartUpdate(syncWhatsAppLinks);
+
+  console.info('🚀 Pastéis da Ponte Brasil – app inicializada!');
+}
+
+/* ------------------------------------------------------------------ */
+/* Helper: gera msg WA e injeta nos links de CTA + Checkout           */
+/* ------------------------------------------------------------------ */
+function syncWhatsAppLinks () {
+  const { items, total } = getCartSummary();  // do módulo cart.js
+  const products         = getAllProducts();  // para resolver nomes
+  const message          = generateWhatsAppMessage(items, products, total);
+  updateWhatsAppLinks(message);
+}
+
+/* ------------------------------------------------------------------ */
+/* Dispara inicialização quando DOM estiver pronto                    */
+/* ------------------------------------------------------------------ */
+document.addEventListener('DOMContentLoaded', initializeApp);
+
+
+--------------------------------------------------------------------------------
+Fim do arquivo: js\main.js
+--------------------------------------------------------------------------------
+
+
+================================================================================
+Arquivo: js\modules\cart.js
+Formato: .js
+================================================================================
+
+// js/modules/cart.js
+import { $, $$ }                             from '../utils/domUtils.js';
+import { getProductById, getAllProducts }    from './productCatalog.js';
+import { generateWhatsAppMessage,
+         updateWhatsAppLinks }               from './whatsapp.js';
+
+/* ------------------------------------------------------------------ */
+/* Estado                                                              */
+/* ------------------------------------------------------------------ */
+let cart          = loadCartFromStorage();   // [{ id, qty }]
+const listeners   = [];                      // callbacks disparados em alterações
+
+/* ------------------------------------------------------------------ */
+/* API pública – exporta para main.js e outros módulos                 */
+/* ------------------------------------------------------------------ */
+export function initCart () {
+  renderCartUI();
+}
+
+export function onCartUpdate (cb) {
+  if (typeof cb === 'function') listeners.push(cb);
+}
+
+export function getCartSummary () {
+  const items = cart.map(i => ({ ...i }));          // cópia
+  const total = items.reduce((s, i) => s + i.qty * 1, 0); // €1 cada
+  return { items, total };
+}
+
+export function addItemToCart (id, qty = 1) {
+  qty = parseInt(qty);
+  const item = cart.find(i => i.id === id);
+  item ? item.qty += qty : cart.push({ id, qty });
+  persistCart();
+  updateAll();
+}
+
+export function changeItemQty (id, delta) {
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
+  item.qty = Math.max(1, item.qty + delta);
+  persistCart();
+  updateAll();
+}
+
+export function removeItem (id) {
+  cart = cart.filter(i => i.id !== id);
+  persistCart();
+  updateAll();
+}
+
+export function updateCartIcon () {
+  const totalQty = cart.reduce((s, i) => s + i.qty, 0);
+  $('#cartCount').textContent = totalQty;
+}
+
+/* ------------------------------------------------------------------ */
+/* Internas                                                            */
+/* ------------------------------------------------------------------ */
+function updateAll () {
+  renderCartUI();
+  updateCartIcon();
+  fireListeners();
+  syncWhatsAppMessage();
+}
+
+function renderCartUI () {
+  const container   = $('#cartItemsContainer');
+  const totalLabel  = $('#cartTotal');
+  if (!container) return;
+
+  container.innerHTML = '';
+  let total = 0;
+
+  cart.forEach(i => {
+    const p = getProductById(i.id);
+    total  += i.qty * p.price;
+
+    container.insertAdjacentHTML('beforeend', `
+      <div class="flex justify-between items-center">
+        <span>${i.qty}× ${p.name}</span>
+        <div class="flex items-center space-x-2">
+          <button class="px-2" data-action="dec" data-id="${i.id}">−</button>
+          <button class="px-2" data-action="inc" data-id="${i.id}">+</button>
+          <button class="text-red-600" data-action="del" data-id="${i.id}">&times;</button>
+        </div>
+      </div>
+    `);
+  });
+
+  totalLabel.textContent = `€${total.toFixed(2)}`;
+
+  // delegação para + / − / excluir
+  container.onclick = (e) => {
+    const btn   = e.target.closest('button');
+    if (!btn) return;
+    const id    = parseInt(btn.dataset.id);
+    const act   = btn.dataset.action;
+    if (act === 'inc')      changeItemQty(id, 1);
+    else if (act === 'dec') changeItemQty(id, -1);
+    else if (act === 'del') removeItem(id);
+  };
+}
+
+function fireListeners () {
+  const summary = getCartSummary();
+  listeners.forEach(cb => cb(summary));
+}
+
+function syncWhatsAppMessage () {
+  const { items, total } = getCartSummary();
+  const message          = generateWhatsAppMessage(items, getAllProducts(), total);
+  updateWhatsAppLinks(message);
+}
+
+/* ------------------------------------------------------------------ */
+/* Persistência em localStorage                                       */
+/* ------------------------------------------------------------------ */
+function persistCart () {
+  localStorage.setItem('ppb-cart', JSON.stringify(cart));
+}
+function loadCartFromStorage () {
+  try { return JSON.parse(localStorage.getItem('ppb-cart')) || []; }
+  catch { return []; }
+}
+
+
+--------------------------------------------------------------------------------
+Fim do arquivo: js\modules\cart.js
+--------------------------------------------------------------------------------
+
+
+================================================================================
+Arquivo: js\modules\menu.js
+Formato: .js
+================================================================================
+
+// js/modules/menu.js
+import { $ } from '../utils/domUtils.js'; // Se estiver usando domUtils.js
+// Se não, use: const $ = (sel) => document.querySelector(sel);
+
+// Funções a serem importadas de outros módulos (ainda não criados completamente)
+// import { openProductModal } from './productModal.js';
+// import { addItemToCart } from './cart.js';
+
+const menuGrid = $('#menuGrid');
+
+// Placeholder para funções que virão de outros módulos
+// Para este exemplo, vamos simular a existência delas ou criar stubs
+const openProductModal = (productId) => console.log(`Abrir modal para produto ID: ${productId}`);
+const addItemToCart = (productId, quantity) => console.log(`Adicionar ${quantity} do produto ID: ${productId} ao carrinho`);
+
+function createProductCard(product) {
+  const card = document.createElement('div');
+  card.className = 'bg-white rounded-lg shadow hover:shadow-lg transition product-card';
+  // Adicionamos um data attribute para identificar o produto facilmente
+  card.dataset.productId = product.id;
+
+  card.innerHTML = `
+    <img src="${product.img}" alt="${product.name}" class="w-full h-70 object-cover rounded-t-lg cursor-pointer product-image" />
+    <div class="p-4 space-y-3">
+      <h4 class="text-xl font-semibold">${product.name}</h4>
+      <div class="flex items-center space-x-3">
+        <label for="qty-${product.id}" class="sr-only">Quantidade para ${product.name}</label>
+        <input id="qty-${product.id}" type="number" min="1" value="1"
+               class="w-20 border px-2 py-1 rounded product-qty">
+        <button class="flex-1 bg-amber-500 hover:bg-amber-600 text-white rounded py-2 add-to-cart-btn">
+          Adicionar
+        </button>
+      </div>
+    </div>
+  `;
+  return card;
+}
+
+export function renderMenu(products) {
+  if (!menuGrid) {
+    console.error('Elemento menuGrid não encontrado!');
+    return;
+  }
+  menuGrid.innerHTML = ''; // Limpa o grid antes de renderizar
+  products.forEach(product => {
+    const card = createProductCard(product);
+    menuGrid.appendChild(card);
+  });
+}
+
+// Aprimoramento: Delegação de Eventos
+// Adicionamos um único event listener ao container do menu
+// Isso é mais eficiente do que adicionar um listener para cada botão/imagem
+export function initMenuEventListeners() {
+  if (!menuGrid) return;
+
+  menuGrid.addEventListener('click', (event) => {
+    const target = event.target;
+    const productCard = target.closest('.product-card'); // Encontra o card pai
+
+    if (!productCard) return; // Sai se o clique não foi dentro de um card
+
+    const productId = parseInt(productCard.dataset.productId);
+
+    if (target.classList.contains('product-image')) {
+      // Lógica para abrir o modal do produto (será implementada em productModal.js)
+      // openProductModal(productId); // Descomente quando productModal.js estiver pronto
+      console.log(`Clicou na imagem do produto ID: ${productId}. Abrir modal.`);
+    } else if (target.classList.contains('add-to-cart-btn')) {
+      const qtyInput = productCard.querySelector('.product-qty');
+      const quantity = parseInt(qtyInput.value) || 1;
+      // Lógica para adicionar ao carrinho (será implementada em cart.js)
+      // addItemToCart(productId, quantity); // Descomente quando cart.js estiver pronto
+      console.log(`Adicionar ${quantity} do produto ID: ${productId} ao carrinho.`);
+       // Feedback visual (opcional)
+      target.textContent = 'Adicionado!';
+      setTimeout(() => { target.textContent = 'Adicionar'; }, 1500);
+    }
+  });
+}
+
+--------------------------------------------------------------------------------
+Fim do arquivo: js\modules\menu.js
+--------------------------------------------------------------------------------
+
+
+================================================================================
+Arquivo: js\modules\productCatalog.js
+Formato: .js
+================================================================================
+
+// js/modules/productCatalog.js
+const products = [
+  {id:1, name:'Leite Ninho',     desc:'Creme suave de leite em pó.',        img:'./images/Leite_Ninho.png',  price:1},
+  {id:2, name:'Paçoquita',       desc:'Amendoim amanteigado cremoso.',      img:'./images/Paçoquita.png',price:1},
+  {id:3, name:'Brigadeiro',      desc:'Chocolate tradicional brasileiro.',  img:'./images/Pastel_de_Brigadeiro.png',price:1},
+  {id:4, name:'Beijinho',        desc:'Coco fresco e leite condensado.',    img:'./images/Pastel_de_Beijinho.png',price:1},
+  {id:5, name:'Doce de Goiaba',  desc:'Goiabada cremosa artesanal.',        img:'./images/Doce_de_Goiaba.png', price:1},
+  {id:6, name:'Doce de Leite',   desc:'Cremoso e saboroso doce de leite.',  img:'./images/Pastel_de_Doce_de_Leite.png',price:1},
+  {id:7, name:'Morango em Calda',desc:'Morangos frescos em calda.',         img:'./images/Morango_em_Calda.png',price:1},
+  {id:8, name:'Tapioca',         desc:'Creme de tapioca.',                  img:'./images/Tapioca.png',price:1},
+  {id:9, name:'Maracujá Gourmet',desc:'Curd de maracujá com sementes.',     img:'./images/Maracuja.png',price:1},
+];
+
+export function getAllProducts() {
+  return products;
+}
+
+export function getProductById(id) {
+  return products.find(p => p.id === id);
+}
+
+--------------------------------------------------------------------------------
+Fim do arquivo: js\modules\productCatalog.js
+--------------------------------------------------------------------------------
+
+
+================================================================================
+Arquivo: js\modules\productModal.js
+Formato: .js
+================================================================================
+
+// js/modules/productModal.js
+import { $, $$ }             from '../utils/domUtils.js';
+import { getProductById }    from './productCatalog.js';
+import { addItemToCart }     from './cart.js';
+
+const els = {
+  modal:           $('#productView'),
+  img:             $('#productModalImg'),
+  title:           $('#productModalTitle'),
+  desc:            $('#productModalDesc'),
+  qtyInput:        $('#productModalQty'),
+  addBtn:          $('#addProductToCartBtn'),
+  closeBtn:        $('#closeProductBtn')
+};
+
+let currentProductId = null;
+
+/* ---------- A P I  ---------- */
+export function openProductModal(id) {
+  const p = getProductById(id);
+  if (!p) return;
+
+  currentProductId         = id;
+  els.img.src              = p.img;
+  els.img.alt              = p.name;
+  els.title.textContent    = p.name;
+  els.desc.textContent     = p.desc;
+  els.qtyInput.value       = 1;
+  els.modal.classList.remove('hidden');
+}
+
+export function closeProductModal() {
+  els.modal.classList.add('hidden');
+}
+
+/* ---------- Event Listeners ---------- */
+function handleAdd() {
+  const qty = parseInt(els.qtyInput.value) || 1;
+  addItemToCart(currentProductId, qty);
+  closeProductModal();
+}
+
+export function initProductModal() {
+  els.addBtn.addEventListener('click', handleAdd);
+  els.closeBtn.addEventListener('click', closeProductModal);
+
+  // Também fecha ao clicar fora da caixa
+  els.modal.addEventListener('click', (e) => {
+    if (e.target === els.modal) closeProductModal();
+  });
+}
+
+
+--------------------------------------------------------------------------------
+Fim do arquivo: js\modules\productModal.js
+--------------------------------------------------------------------------------
+
+
+================================================================================
+Arquivo: js\modules\ui.js
+Formato: .js
+================================================================================
+
+// js/modules/ui.js
+import { $, $$ } from '../utils/domUtils.js';
+
+const cartView    = $('#cartView');
+const cartBtn     = $('#cartBtn');
+const closeCartBtn= $('#closeCartBtn');
+
+function openCart()  { cartView.classList.remove('hidden'); }
+function closeCart() { cartView.classList.add('hidden'); }
+
+export function initUIEventListeners() {
+  cartBtn.addEventListener('click', openCart);
+  closeCartBtn.addEventListener('click', closeCart);
+  // Fecha ao clicar fora do painel
+  cartView.addEventListener('click', (e) => {
+    if (e.target === cartView) closeCart();
+  });
+}
+
+
+--------------------------------------------------------------------------------
+Fim do arquivo: js\modules\ui.js
+--------------------------------------------------------------------------------
+
+
+================================================================================
+Arquivo: js\modules\whatsapp.js
+Formato: .js
+================================================================================
+
+// js/modules/whatsapp.js
+const phone = '351910000000';                 // <-- altere para o seu número
+
+export function generateWhatsAppMessage(cartItems, products, total) {
+  if (cartItems.length === 0) return '';
+  const linhas = cartItems.map(i => {
+    const p = products.find(pr => pr.id === i.id);
+    return `${i.qty}× ${p.name}`;
+  });
+  linhas.push(`Total: €${total.toFixed(2)}`);
+  return encodeURIComponent(`Olá! Quero pedir:\n${linhas.join('\n')}`);
+}
+
+export function updateWhatsAppLinks(message) {
+  const links = ['#whatsappCtaBtn', '#checkoutBtn']
+    .map(sel => document.querySelector(sel))
+    .filter(Boolean);
+  links.forEach(a => {
+    a.href = `https://wa.me/${phone}?text=${message}`;
+  });
+}
+
+
+--------------------------------------------------------------------------------
+Fim do arquivo: js\modules\whatsapp.js
+--------------------------------------------------------------------------------
+
+
+================================================================================
+Arquivo: js\utils\domUtils.js
+Formato: .js
+================================================================================
+
+// js/utils/domUtils.js
+export function $(selector, parent = document) {
+  return parent.querySelector(selector);
+}
+
+export function $$(selector, parent = document) {
+  return Array.from(parent.querySelectorAll(selector));
+}
+
+--------------------------------------------------------------------------------
+Fim do arquivo: js\utils\domUtils.js
+--------------------------------------------------------------------------------
+
+

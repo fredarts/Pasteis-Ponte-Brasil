@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pastéis da Ponte Brasil</title>
+
+  <!-- Tailwind (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="font-sans bg-beige-50 scroll-smooth">
+
+<!-- Navbar -->
+<header class="fixed inset-x-0 top-0 z-50 bg-white shadow">
+  <div class="max-w-8xl mx-auto flex items-center justify-between p-4">
+
+    <!-- Marca -->
+    <div class="flex items-center gap-2">
+      <img src="images/logo.png" alt="logo"
+           class="w-10 h-10 object-contain" />
+      <span class="font-bold text-lg text-gray-800">
+        Pastéis da Ponte Brasil
+      </span>
+    </div>
+
+    <!-- Navegação desktop -->
+    <nav class="hidden sm:flex items-center gap-8 text-gray-700">
+      <a href="#galeria" class="hover:text-teal-600">Galeria</a>
+      <a href="#menu"    class="hover:text-teal-600">Sabores</a>
+      <a href="#footer"  class="hover:text-teal-600">Contato</a>
+    </nav>
+
+    <!-- Ações (carrinho + utilizador) -->
+    <div class="flex items-center gap-4">
+
+      <button id="openSignupBtn"
+        class="hidden sm:flex items-center gap-2 text-gray-700
+               hover:text-teal-600 transition">
+  <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M12 12a5 5 0 100-10 5 5 0 000 10zm-7 9a7 7 0 0114 0z"/>
+  </svg>
+  <span class="font-medium">Conta</span>
+</button>
+
+      <!-- Carrinho -->
+      <button id="cartBtn"
+              class="relative flex items-center gap-2
+                     bg-amber-500 hover:bg-amber-600
+                     text-white px-4 py-2 rounded transition">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M3 3h2l.4 2M7 13h10l4-8H5.4" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" fill="none"/>
+          <circle cx="8.5" cy="19.5" r="1.5"/>
+          <circle cx="17.5" cy="19.5" r="1.5"/>
+        </svg>
+        <span>Carrinho</span>
+        <span id="cartCount"
+              class="absolute -top-2 -right-2 bg-teal-600
+                     text-xs px-1.5 rounded-full">0</span>
+      </button>
+
+      <!-- Utilizador -->
+      <div class="flex items-center gap-2">
+        <span id="userName"
+              class="hidden sm:block font-medium text-gray-800">
+          João Silva
+        </span>
+        <img id="userAvatar"
+             src="images/avatar.jpg"
+             alt="Avatar do usuário"
+             class="w-9 h-9 rounded-full object-cover
+                    ring-2 ring-amber-500 ring-offset-2 ring-offset-white">
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<div class="h-20"></div> <!-- spacer -->
+
+<!-- Hero Ken-Burns com 4 banners -->
+<section class="relative h-[100vh] overflow-hidden">
+
+  <!-- Slides -->
+  <div class="kenburns-slide"><img src="images/banner_01.png" alt=""></div>
+  <div class="kenburns-slide"><img src="images/banner_02.png" alt=""></div>
+  <div class="kenburns-slide"><img src="images/banner_03.png" alt=""></div>
+  <div class="kenburns-slide"><img src="images/banner_04.png" alt=""></div>
+
+  <!-- Overlay de conteúdo -->
+  <div class="absolute inset-0 bg-black/40
+              flex flex-col items-center justify-center
+              text-center text-white p-4">
+    <h1 class="text-4xl sm:text-5xl font-extrabold mb-4 drop-shadow">
+      Doces Tradições, Alma Brasileira
+    </h1>
+    <a href="#menu"
+       class="px-6 py-3 bg-amber-500 hover:bg-amber-600
+              rounded text-lg font-semibold">
+      Conferir Sabores
+    </a>
+  </div>
+</section>
+
+
+<!-- Galeria -->
+<section id="galeria" class="max-w-6xl mx-auto py-16 px-4">
+  <h2 class="text-3xl font-bold text-center mb-8">Momentos de Sabor</h2>
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+    <img src="images/gallery_01.png" class="w-full h-68 object-cover rounded"/>
+    <img src="images/gallery_02.png" class="w-full h-68 object-cover rounded"/>
+    <img src="images/gallery_03.png" class="w-full h-68 object-cover rounded"/>
+    <img src="images/gallery_04.png" class="w-full h-68 object-cover rounded"/>
+  </div>
+</section>
+
+<!-- Menu -->
+<section id="menu" class="bg-amber-50 py-16">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-10">Nosso Menu</h2>
+    <div id="menuGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Produtos serão inseridos aqui pelo JS -->
+    </div>
+  </div>
+</section>
+
+<!-- Produto Modal -->
+<section id="productView"
+         class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+  <div class="bg-white rounded-lg max-w-4xl w-full p-6 relative
+              flex flex-col lg:flex-row gap-8 overflow-y-auto max-h-[90vh]">
+
+    <!-- Botão fechar -->
+    <button id="closeProductBtn"
+            class="absolute top-3 right-4 text-2xl text-gray-600 hover:text-gray-900">×</button>
+
+    <!-- Coluna esquerda: imagens -->
+    <div class="lg:w-1/2 space-y-4">
+      <!-- imagem principal -->
+      <img id="productModalImg"
+           class="w-full h-92 object-cover rounded-lg shadow" alt="Produto">
+
+      <!-- mini-galeria -->
+      <div id="productModalGalleryWrap">
+        <h4 class="text-sm font-semibold mb-1">Mais imagens</h4>
+        <div id="productModalGallery" class="flex gap-2"></div>
+      </div>
+
+      <!-- vídeo -->
+      <div id="productModalVideoWrap" class="hidden">
+        <h4 class="text-sm font-semibold mb-1">Vídeo</h4>
+        <!-- Vídeo mp4 / YouTube – usa w-full mantendo ratio -->
+        <div class="aspect-video">
+          <iframe id="productModalVideo" class="w-full h-full rounded-lg"
+                  src="" title="video" allowfullscreen></iframe>
+          <!-- Se usar mp4 local:<video id="productModalVideo" controls class="w-full h-full rounded-lg"></video> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Coluna direita: textos / qty -->
+    <div class="lg:w-1/2 flex flex-col gap-4">
+      <h3 id="productModalTitle" class="text-2xl font-bold"></h3>
+      <p id="productModalTeaser" class="text-lg text-amber-700 font-semibold"></p>
+
+      <div>
+        <h4 class="font-semibold mb-1">Descrição</h4>
+        <p id="productModalDesc" class="text-gray-700 leading-relaxed"></p>
+      </div>
+
+      <div>
+        <h4 class="font-semibold mb-1">Ficha técnica</h4>
+        <p id="productModalTech" class="text-gray-700 text-sm"></p>
+      </div>
+
+      <div>
+        <h4 class="font-semibold mb-1">Ingredientes</h4>
+        <p id="productModalIngredients" class="text-gray-700 text-sm"></p>
+      </div>
+
+      <!-- quantidade + botão -->
+      <div class="mt-auto flex items-center gap-3">
+        <label for="productModalQty" class="font-medium">Qtd.:</label>
+        <input id="productModalQty" type="number" min="1" value="1"
+               class="w-24 border px-3 py-1 rounded">
+        <button id="addProductToCartBtn"
+                class="flex-1 bg-amber-500 hover:bg-amber-600
+                       text-white py-3 rounded-lg font-semibold">
+          Adicionar ao carrinho
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Tela Carrinho -->
+<section id="cartView" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-50 overflow-auto p-4">
+  <div class="bg-white max-w-lg mx-auto rounded-lg shadow p-6 relative">
+    <button id="closeCartBtn" class="absolute top-2 right-3 text-2xl text-gray-600 hover:text-gray-900">×</button>
+    <h3 class="text-2xl font-bold mb-4">Seu Carrinho</h3>
+    <div id="cartItemsContainer" class="space-y-4">
+      <!-- Itens do carrinho serão inseridos aqui -->
+    </div>
+    <div class="flex justify-between items-center mt-4 border-t pt-4">
+      <span class="text-lg font-semibold">Total:</span>
+      <span id="cartTotal" class="text-xl font-bold text-amber-600">€0,00</span>
+    </div>
+    <button id="checkoutBtn" class="w-full mt-6 bg-teal-600 hover:bg-teal-700 text-white py-3 rounded text-lg">
+      Finalizar  • WhatsApp
+    </button>
+  </div>
+</section>
+
+<!-- Modal Criar Conta / Login -->
+<section id="signupView"
+         class="fixed inset-0 z-[60] hidden bg-black/70 backdrop-blur-sm
+                flex items-center justify-center p-4">
+  <form id="signupForm"
+        class="bg-white w-full max-w-lg rounded-lg shadow-lg p-6 space-y-5
+               overflow-y-auto max-h-[90vh]">
+    <h2 class="text-2xl font-bold text-center mb-2">Criar Conta</h2>
+
+    <!-- Dados Pessoais -->
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div>
+        <label class="block text-sm font-medium mb-1" for="name">Nome*</label>
+        <input id="name" type="text" required
+               class="w-full border rounded px-3 py-2 focus:outline-none
+                      focus:ring-2 focus:ring-amber-500">
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1" for="phone">Telefone*</label>
+        <input id="phone" type="tel" placeholder="+351 910 000 000" required
+               class="w-full border rounded px-3 py-2 focus:outline-none
+                      focus:ring-2 focus:ring-amber-500">
+      </div>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium mb-1" for="email">Email*</label>
+      <input id="email" type="email" required
+             class="w-full border rounded px-3 py-2 focus:outline-none
+                    focus:ring-2 focus:ring-amber-500">
+    </div>
+
+    <!-- Endereço -->
+    <h3 class="text-lg font-semibold pt-2">Endereço de Entrega</h3>
+    <div>
+      <label class="block text-sm font-medium mb-1" for="street">Rua*</label>
+      <input id="street" type="text" required
+             class="w-full border rounded px-3 py-2">
+    </div>
+
+    <div class="grid sm:grid-cols-3 gap-4">
+      <div>
+        <label class="block text-sm font-medium mb-1" for="number">Nº*</label>
+        <input id="number" type="text" required
+               class="w-full border rounded px-3 py-2">
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1" for="zip">CEP*</label>
+        <input id="zip" type="text" required
+               class="w-full border rounded px-3 py-2">
+      </div>
+      <div>
+        <label class="block text-sm font-medium mb-1" for="city">Cidade*</label>
+        <input id="city" type="text" required
+               class="w-full border rounded px-3 py-2">
+      </div>
+    </div>
+
+    <!-- Foto opcional -->
+    <div>
+      <label class="block text-sm font-medium mb-1" for="avatarUrl">Foto (URL)</label>
+      <input id="avatarUrl" type="url"
+             class="w-full border rounded px-3 py-2">
+    </div>
+
+    <!-- Botões -->
+    <div class="flex justify-end gap-3 pt-4">
+      <button type="button" id="cancelSignup"
+              class="px-4 py-2 rounded border hover:bg-gray-100">
+        Cancelar
+      </button>
+      <button type="submit"
+              class="px-6 py-2 rounded bg-amber-500 hover:bg-amber-600
+                     text-white font-semibold">
+        Salvar
+      </button>
+    </div>
+  </form>
+</section>
+
+
+<!-- CTA WhatsApp -->
+<div class="fixed bottom-6 right-6 z-40">
+  <a id="whatsappCtaBtn" target="_blank" class="flex items-center bg-green-600 hover:bg-green-700 text-white rounded-full px-5 py-3 shadow-lg">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 4.98 0 11.1c0 2.19.64 4.23 1.74 5.96L0 24l7.18-1.88c1.79.49 3.68.75 5.82.75 6.63 0 12-4.98 12-11.1C24 4.98 18.63 0 12 0zm0 20.2c-1.85 0-3.56-.3-5.07-.86l-.36-.14-3.17.83.85-3.09-.21-.32C3.21 15.21 2.4 13.2 2.4 11.1 2.4 6.25 6.68 2.4 12 2.4s9.6 3.85 9.6 8.7c0 4.75-4.28 8.7-9.6 8.7zm5.43-6.55c-.29-.14-1.71-.85-1.98-.95-.27-.1-.47-.14-.67.14-.19.28-.77.95-.94 1.14-.17.19-.34.21-.63.07-.29-.14-1.23-.45-2.35-1.45-.87-.77-1.46-1.72-1.63-2-.17-.28-.02-.43.13-.57.13-.13.29-.34.44-.52.15-.18.19-.31.29-.5.1-.19.05-.38-.02-.53-.07-.14-.63-1.53-.86-2.08-.23-.55-.46-.48-.67-.49-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.79.35-.27.28-1.03 1.01-1.03 2.45s1.06 2.84 1.21 3.04c.15.2 2.09 3.2 5.08 4.49.71.31 1.26.5 1.69.64.71.23 1.36.2 1.88.12.57-.09 1.71-.69 1.95-1.35.24-.66.24-1.23.17-1.35-.07-.12-.26-.19-.55-.33z"/></svg>
+    Peça pelo WhatsApp
+  </a>
+</div>
+
+<!-- Footer -->
+<footer id="footer" class="bg-gray-800 text-gray-200">
+  <div class="max-w-6xl mx-auto grid gap-8 px-6 py-12
+              sm:grid-cols-2 lg:grid-cols-4">
+
+    <!-- Marca -->
+    <div class="space-y-3">
+      <img src="images/logo.png" alt="Pastéis da Ponte Brasil" class="w-16 h-16">
+      <p class="text-sm leading-relaxed">
+        Tradição portuguesa e alma brasileira em cada folhado.
+      </p>
+    </div>
+
+    <!-- Contacto -->
+    <div class="space-y-2">
+      <h4 class="font-semibold text-amber-400">Contato</h4>
+      <p class="text-sm flex items-center gap-2">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 01.96-.27 11.36 11.36 0 003.54.57 1 1 0 011 1v3.61a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.6a1 1 0 011 1 11.36 11.36 0 00.57 3.54 1 1 0 01-.27.96l-2.28 2.29z"/></svg>
+        <a href="tel:+351910000000" class="hover:text-amber-400">+351 910 000 000</a>
+      </p>
+      <p class="text-sm flex items-center gap-2">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M21 4H3a2 2 0 00-2 2v12a2 2 0 002 2h18a2 2 0 002-2V6a2 2 0 00-2-2zm0 2l-9 6-9-6h18zm0 12H3V8l9 6 9-6v10z"/></svg>
+        <a href="mailto:encomendas@pasteisponte.pt" class="hover:text-amber-400">
+          encomendas@pasteisponte.pt
+        </a>
+      </p>
+    </div>
+
+    <!-- Endereço -->
+    <div class="space-y-2">
+      <h4 class="font-semibold text-amber-400">Endereço</h4>
+      <p class="text-sm leading-relaxed">
+        Rua da Ponte n.º 27<br>
+        4600-000 Amarante • Portugal
+      </p>
+    </div>
+
+    <!-- Redes Sociais -->
+    <div class="space-y-3">
+      <h4 class="font-semibold text-amber-400">Siga-nos</h4>
+      <div class="flex gap-4 text-2xl">
+        <a href="https://www.instagram.com/pasteisponte" target="_blank" aria-label="Instagram"
+           class="hover:text-amber-400 transition">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.76 5.76 0 0122 7.75v8.5A5.76 5.76 0 0116.25 22h-8.5A5.76 5.76 0 012 16.25v-8.5A5.76 5.76 0 017.75 2zm0 2A3.76 3.76 0 004 7.75v8.5A3.76 3.76 0 007.75 20h8.5A3.76 3.76 0 0020 16.25v-8.5A3.76 3.76 0 0016.25 4h-8.5zM12 7a5 5 0 11-5 5 5 5 0 015-5zm0 2a3 3 0 103 3 3 3 0 00-3-3zm6.5-2.75a1.25 1.25 0 11-1.25-1.25 1.25 1.25 0 011.25 1.25z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/pasteisponte" target="_blank" aria-label="Facebook"
+           class="hover:text-amber-400 transition">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12a10 10 0 10-11.5 9.9v-7H8v-3h2.5V9c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.7-1.6 1.5v1.8H16l-.3 3h-2.5v7A10 10 0 0022 12z"/></svg>
+        </a>
+        <a href="https://wa.me/351910000000" target="_blank" aria-label="WhatsApp"
+           class="hover:text-amber-400 transition">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20.52 3.48a11.84 11.84 0 00-18.44 14l-1.34 4.93a1 1 0 001.22 1.21l4.86-1.28a11.81 11.81 0 0013.7-18.86zm-8.54 16.5a9.46 9.46 0 01-4.83-1.31l-.35-.21-2.88.76.78-2.8-.24-.36a9.46 9.46 0 1117.29-5.88 9.46 9.46 0 01-9.77 9.8zm5.43-6.55c-.29-.14-1.71-.85-1.98-.95-.27-.1-.47-.14-.67.14-.19.28-.77.95-.94 1.14-.17.19-.34.21-.63.07-.29-.14-1.23-.45-2.35-1.45-.87-.77-1.46-1.72-1.63-2-.17-.28-.02-.43.13-.57.13-.13.29-.34.44-.52.15-.18.19-.31.29-.5.1-.19.05-.38-.02-.53-.07-.14-.63-1.53-.86-2.08-.23-.55-.46-.48-.67-.49-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.79.35-.27.28-1.03 1.01-1.03 2.45s1.06 2.84 1.21 3.04c.15.2 2.09 3.2 5.08 4.49.71.31 1.26.5 1.69.64.71.23 1.36.2 1.88.12.57-.09 1.71-.69 1.95-1.35.24-.66.24-1.23.17-1.35-.07-.12-.26-.19-.55-.33z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-gray-700 py-4 text-center text-sm">
+    © 2025 Pastéis da Ponte Brasil • Todos os direitos reservados
+  </div>
+</footer>
+
+
+<script src="js/main.js" type="module"></script>
+</body>
+</html>

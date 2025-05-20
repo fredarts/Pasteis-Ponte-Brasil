@@ -1,0 +1,45 @@
+/* -----------------------------------------------------------
+   Ken Burns + cross-fade para 4 banners
+   ----------------------------------------------------------- */
+:root{
+  /* factor >1 garante que a imagem cobre sempre o viewport     */
+  --kb-start: 1.15;   /* escala inicial 115 %                  */
+  --kb-end  : 1.35;   /* escala final   135 %                  */
+  --kb-time : 24s;    /* duração total da animação de cada img */
+}
+
+@keyframes kbZoom {
+  from{ transform: scale(var(--kb-start)) translate(-4%, -4%); }
+  to  { transform: scale(var(--kb-end))   translate( 4%,  4%); }
+}
+
+/* fade in-out escalonado (4 slides → 0–25–50–75 %) ------------*/
+@keyframes kbFade {
+  0%   { opacity:1; }
+  20%  { opacity:1; }
+  25%  { opacity:0; }
+  95%  { opacity:0; }
+  100% { opacity:1; }
+}
+
+.kenburns-slide{
+  position:absolute; inset:0;
+  animation: kbFade var(--kb-time) linear infinite;
+}
+.kenburns-slide img{
+  width:100%; height:100%; object-fit:cover;
+  animation: kbZoom var(--kb-time) ease-in-out infinite alternate;
+}
+
+/* 4 slides com delays de fase -------------------------------*/
+.kenburns-slide:nth-child(1){ animation-delay:   0s; }
+.kenburns-slide:nth-child(2){ animation-delay: 6s;  }
+.kenburns-slide:nth-child(3){ animation-delay:12s;  }
+.kenburns-slide:nth-child(4){ animation-delay:18s;  }
+.kenburns-slide:nth-child(1) img{ animation-delay:   0s; }
+.kenburns-slide:nth-child(2) img{ animation-delay: 6s;  }
+.kenburns-slide:nth-child(3) img{ animation-delay:12s;  }
+.kenburns-slide:nth-child(4) img{ animation-delay:18s;  }
+
+
+.modal-open { overflow:hidden; }

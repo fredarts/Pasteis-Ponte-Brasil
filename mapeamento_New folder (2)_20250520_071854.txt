@@ -1,0 +1,1151 @@
+Mapeamento da Pasta: C:/Users/Fred/Desktop/New folder (2)
+Gerado em: 2025-05-20 07:18:54
+Diretórios Ignorados: .git
+================================================================================
+ESTRUTURA DA PASTA (excluindo ignorados)
+================================================================================
+
+New folder (2)/
+    css/
+    images/
+    js/
+    Mapping.py
+    index.html
+    mapeamento_New folder (2)_20250520_054818.txt
+        style.css
+        Caixa_1_Unidade.png
+        Caixa_2_unidades.png
+        ChatGPT Image 20_05_2025, 04_08_48.png
+        Doce_de_Goiaba.png
+        Leite_Ninho.png
+        Maracuja.png
+        Morango_em_Calda.png
+        Pastel_de_Beijinho.png
+        Pastel_de_Brigadeiro.png
+        Pastel_de_Doce_de_Leite.png
+        Paçoquita.png
+        Tapioca.png
+        avatar.jpg
+        banner_01.png
+        banner_02.png
+        banner_03.png
+        banner_04.png
+        gallery_01.png
+        gallery_02.png
+        gallery_03.png
+        gallery_04.png
+        gallery_05.png
+        gallery_06.png
+        logo.png
+        modules/
+        utils/
+        main.js
+            cart.js
+            menu.js
+            productCatalog.js
+            productModal.js
+            ui.js
+            whatsapp.js
+            domUtils.js
+
+================================================================================
+CONTEÚDO DOS ARQUIVOS (.css, .html, .js, .json)
+================================================================================
+
+================================================================================
+Arquivo: index.html
+Formato: .html
+================================================================================
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pastéis da Ponte Brasil</title>
+
+  <!-- Tailwind (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="font-sans bg-beige-50 scroll-smooth">
+
+<!-- Navbar -->
+<header class="fixed inset-x-0 top-0 z-50 bg-white shadow">
+  <div class="max-w-8xl mx-auto flex items-center justify-between p-4">
+
+    <!-- Marca -->
+    <div class="flex items-center gap-2">
+      <img src="images/logo.png" alt="logo"
+           class="w-10 h-10 object-contain" />
+      <span class="font-bold text-lg text-gray-800">
+        Pastéis da Ponte Brasil
+      </span>
+    </div>
+
+    <!-- Navegação desktop -->
+    <nav class="hidden sm:flex items-center gap-8 text-gray-700">
+      <a href="#galeria" class="hover:text-teal-600">Galeria</a>
+      <a href="#menu"    class="hover:text-teal-600">Sabores</a>
+      <a href="#footer"  class="hover:text-teal-600">Contato</a>
+    </nav>
+
+    <!-- Ações (carrinho + utilizador) -->
+    <div class="flex items-center gap-4">
+
+      <!-- Carrinho -->
+      <button id="cartBtn"
+              class="relative flex items-center gap-2
+                     bg-amber-500 hover:bg-amber-600
+                     text-white px-4 py-2 rounded transition">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M3 3h2l.4 2M7 13h10l4-8H5.4" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" fill="none"/>
+          <circle cx="8.5" cy="19.5" r="1.5"/>
+          <circle cx="17.5" cy="19.5" r="1.5"/>
+        </svg>
+        <span>Carrinho</span>
+        <span id="cartCount"
+              class="absolute -top-2 -right-2 bg-teal-600
+                     text-xs px-1.5 rounded-full">0</span>
+      </button>
+
+      <!-- Utilizador -->
+      <div class="flex items-center gap-2">
+        <span id="userName"
+              class="hidden sm:block font-medium text-gray-800">
+          João Silva
+        </span>
+        <img id="userAvatar"
+             src="images/avatar.jpg"
+             alt="Avatar do usuário"
+             class="w-9 h-9 rounded-full object-cover
+                    ring-2 ring-amber-500 ring-offset-2 ring-offset-white">
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<div class="h-20"></div> <!-- spacer -->
+
+<!-- Hero Ken-Burns com 4 banners -->
+<section class="relative h-[100vh] overflow-hidden">
+
+  <!-- Slides -->
+  <div class="kenburns-slide"><img src="images/banner_01.png" alt=""></div>
+  <div class="kenburns-slide"><img src="images/banner_02.png" alt=""></div>
+  <div class="kenburns-slide"><img src="images/banner_03.png" alt=""></div>
+  <div class="kenburns-slide"><img src="images/banner_04.png" alt=""></div>
+
+  <!-- Overlay de conteúdo -->
+  <div class="absolute inset-0 bg-black/40
+              flex flex-col items-center justify-center
+              text-center text-white p-4">
+    <h1 class="text-4xl sm:text-5xl font-extrabold mb-4 drop-shadow">
+      Doces Tradições, Alma Brasileira
+    </h1>
+    <a href="#menu"
+       class="px-6 py-3 bg-amber-500 hover:bg-amber-600
+              rounded text-lg font-semibold">
+      Conferir Sabores
+    </a>
+  </div>
+</section>
+
+
+<!-- Galeria -->
+<section id="galeria" class="max-w-6xl mx-auto py-16 px-4">
+  <h2 class="text-3xl font-bold text-center mb-8">Momentos de Sabor</h2>
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+    <img src="images/gallery_01.png" class="w-full h-68 object-cover rounded"/>
+    <img src="images/gallery_02.png" class="w-full h-68 object-cover rounded"/>
+    <img src="images/gallery_03.png" class="w-full h-68 object-cover rounded"/>
+    <img src="images/gallery_04.png" class="w-full h-68 object-cover rounded"/>
+  </div>
+</section>
+
+<!-- Menu -->
+<section id="menu" class="bg-amber-50 py-16">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-10">Nosso Menu</h2>
+    <div id="menuGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Produtos serão inseridos aqui pelo JS -->
+    </div>
+  </div>
+</section>
+
+<!-- Produto Modal -->
+<section id="productView"
+         class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
+  <div class="bg-white rounded-lg max-w-4xl w-full p-6 relative
+              flex flex-col lg:flex-row gap-8 overflow-y-auto max-h-[90vh]">
+
+    <!-- Botão fechar -->
+    <button id="closeProductBtn"
+            class="absolute top-3 right-4 text-2xl text-gray-600 hover:text-gray-900">×</button>
+
+    <!-- Coluna esquerda: imagens -->
+    <div class="lg:w-1/2 space-y-4">
+      <!-- imagem principal -->
+      <img id="productModalImg"
+           class="w-full h-92 object-cover rounded-lg shadow" alt="Produto">
+
+      <!-- mini-galeria -->
+      <div id="productModalGalleryWrap">
+        <h4 class="text-sm font-semibold mb-1">Mais imagens</h4>
+        <div id="productModalGallery" class="flex gap-2"></div>
+      </div>
+
+      <!-- vídeo -->
+      <div id="productModalVideoWrap" class="hidden">
+        <h4 class="text-sm font-semibold mb-1">Vídeo</h4>
+        <!-- Vídeo mp4 / YouTube – usa w-full mantendo ratio -->
+        <div class="aspect-video">
+          <iframe id="productModalVideo" class="w-full h-full rounded-lg"
+                  src="" title="video" allowfullscreen></iframe>
+          <!-- Se usar mp4 local:<video id="productModalVideo" controls class="w-full h-full rounded-lg"></video> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Coluna direita: textos / qty -->
+    <div class="lg:w-1/2 flex flex-col gap-4">
+      <h3 id="productModalTitle" class="text-2xl font-bold"></h3>
+      <p id="productModalTeaser" class="text-lg text-amber-700 font-semibold"></p>
+
+      <div>
+        <h4 class="font-semibold mb-1">Descrição</h4>
+        <p id="productModalDesc" class="text-gray-700 leading-relaxed"></p>
+      </div>
+
+      <div>
+        <h4 class="font-semibold mb-1">Ficha técnica</h4>
+        <p id="productModalTech" class="text-gray-700 text-sm"></p>
+      </div>
+
+      <div>
+        <h4 class="font-semibold mb-1">Ingredientes</h4>
+        <p id="productModalIngredients" class="text-gray-700 text-sm"></p>
+      </div>
+
+      <!-- quantidade + botão -->
+      <div class="mt-auto flex items-center gap-3">
+        <label for="productModalQty" class="font-medium">Qtd.:</label>
+        <input id="productModalQty" type="number" min="1" value="1"
+               class="w-24 border px-3 py-1 rounded">
+        <button id="addProductToCartBtn"
+                class="flex-1 bg-amber-500 hover:bg-amber-600
+                       text-white py-3 rounded-lg font-semibold">
+          Adicionar ao carrinho
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Tela Carrinho -->
+<section id="cartView" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden z-50 overflow-auto p-4">
+  <div class="bg-white max-w-lg mx-auto rounded-lg shadow p-6 relative">
+    <button id="closeCartBtn" class="absolute top-2 right-3 text-2xl text-gray-600 hover:text-gray-900">×</button>
+    <h3 class="text-2xl font-bold mb-4">Seu Carrinho</h3>
+    <div id="cartItemsContainer" class="space-y-4">
+      <!-- Itens do carrinho serão inseridos aqui -->
+    </div>
+    <div class="flex justify-between items-center mt-4 border-t pt-4">
+      <span class="text-lg font-semibold">Total:</span>
+      <span id="cartTotal" class="text-xl font-bold text-amber-600">€0,00</span>
+    </div>
+    <button id="checkoutBtn" class="w-full mt-6 bg-teal-600 hover:bg-teal-700 text-white py-3 rounded text-lg">
+      Finalizar  • WhatsApp
+    </button>
+  </div>
+</section>
+
+<!-- CTA WhatsApp -->
+<div class="fixed bottom-6 right-6 z-40">
+  <a id="whatsappCtaBtn" target="_blank" class="flex items-center bg-green-600 hover:bg-green-700 text-white rounded-full px-5 py-3 shadow-lg">
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 4.98 0 11.1c0 2.19.64 4.23 1.74 5.96L0 24l7.18-1.88c1.79.49 3.68.75 5.82.75 6.63 0 12-4.98 12-11.1C24 4.98 18.63 0 12 0zm0 20.2c-1.85 0-3.56-.3-5.07-.86l-.36-.14-3.17.83.85-3.09-.21-.32C3.21 15.21 2.4 13.2 2.4 11.1 2.4 6.25 6.68 2.4 12 2.4s9.6 3.85 9.6 8.7c0 4.75-4.28 8.7-9.6 8.7zm5.43-6.55c-.29-.14-1.71-.85-1.98-.95-.27-.1-.47-.14-.67.14-.19.28-.77.95-.94 1.14-.17.19-.34.21-.63.07-.29-.14-1.23-.45-2.35-1.45-.87-.77-1.46-1.72-1.63-2-.17-.28-.02-.43.13-.57.13-.13.29-.34.44-.52.15-.18.19-.31.29-.5.1-.19.05-.38-.02-.53-.07-.14-.63-1.53-.86-2.08-.23-.55-.46-.48-.67-.49-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.79.35-.27.28-1.03 1.01-1.03 2.45s1.06 2.84 1.21 3.04c.15.2 2.09 3.2 5.08 4.49.71.31 1.26.5 1.69.64.71.23 1.36.2 1.88.12.57-.09 1.71-.69 1.95-1.35.24-.66.24-1.23.17-1.35-.07-.12-.26-.19-.55-.33z"/></svg>
+    Peça pelo WhatsApp
+  </a>
+</div>
+
+<!-- Footer -->
+<footer id="footer" class="bg-gray-800 text-gray-200">
+  <div class="max-w-6xl mx-auto grid gap-8 px-6 py-12
+              sm:grid-cols-2 lg:grid-cols-4">
+
+    <!-- Marca -->
+    <div class="space-y-3">
+      <img src="images/logo.png" alt="Pastéis da Ponte Brasil" class="w-16 h-16">
+      <p class="text-sm leading-relaxed">
+        Tradição portuguesa e alma brasileira em cada folhado.
+      </p>
+    </div>
+
+    <!-- Contacto -->
+    <div class="space-y-2">
+      <h4 class="font-semibold text-amber-400">Contato</h4>
+      <p class="text-sm flex items-center gap-2">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 01.96-.27 11.36 11.36 0 003.54.57 1 1 0 011 1v3.61a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.6a1 1 0 011 1 11.36 11.36 0 00.57 3.54 1 1 0 01-.27.96l-2.28 2.29z"/></svg>
+        <a href="tel:+351910000000" class="hover:text-amber-400">+351 910 000 000</a>
+      </p>
+      <p class="text-sm flex items-center gap-2">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M21 4H3a2 2 0 00-2 2v12a2 2 0 002 2h18a2 2 0 002-2V6a2 2 0 00-2-2zm0 2l-9 6-9-6h18zm0 12H3V8l9 6 9-6v10z"/></svg>
+        <a href="mailto:encomendas@pasteisponte.pt" class="hover:text-amber-400">
+          encomendas@pasteisponte.pt
+        </a>
+      </p>
+    </div>
+
+    <!-- Endereço -->
+    <div class="space-y-2">
+      <h4 class="font-semibold text-amber-400">Endereço</h4>
+      <p class="text-sm leading-relaxed">
+        Rua da Ponte n.º 27<br>
+        4600-000 Amarante • Portugal
+      </p>
+    </div>
+
+    <!-- Redes Sociais -->
+    <div class="space-y-3">
+      <h4 class="font-semibold text-amber-400">Siga-nos</h4>
+      <div class="flex gap-4 text-2xl">
+        <a href="https://www.instagram.com/pasteisponte" target="_blank" aria-label="Instagram"
+           class="hover:text-amber-400 transition">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.76 5.76 0 0122 7.75v8.5A5.76 5.76 0 0116.25 22h-8.5A5.76 5.76 0 012 16.25v-8.5A5.76 5.76 0 017.75 2zm0 2A3.76 3.76 0 004 7.75v8.5A3.76 3.76 0 007.75 20h8.5A3.76 3.76 0 0020 16.25v-8.5A3.76 3.76 0 0016.25 4h-8.5zM12 7a5 5 0 11-5 5 5 5 0 015-5zm0 2a3 3 0 103 3 3 3 0 00-3-3zm6.5-2.75a1.25 1.25 0 11-1.25-1.25 1.25 1.25 0 011.25 1.25z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/pasteisponte" target="_blank" aria-label="Facebook"
+           class="hover:text-amber-400 transition">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12a10 10 0 10-11.5 9.9v-7H8v-3h2.5V9c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.7-1.6 1.5v1.8H16l-.3 3h-2.5v7A10 10 0 0022 12z"/></svg>
+        </a>
+        <a href="https://wa.me/351910000000" target="_blank" aria-label="WhatsApp"
+           class="hover:text-amber-400 transition">
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20.52 3.48a11.84 11.84 0 00-18.44 14l-1.34 4.93a1 1 0 001.22 1.21l4.86-1.28a11.81 11.81 0 0013.7-18.86zm-8.54 16.5a9.46 9.46 0 01-4.83-1.31l-.35-.21-2.88.76.78-2.8-.24-.36a9.46 9.46 0 1117.29-5.88 9.46 9.46 0 01-9.77 9.8zm5.43-6.55c-.29-.14-1.71-.85-1.98-.95-.27-.1-.47-.14-.67.14-.19.28-.77.95-.94 1.14-.17.19-.34.21-.63.07-.29-.14-1.23-.45-2.35-1.45-.87-.77-1.46-1.72-1.63-2-.17-.28-.02-.43.13-.57.13-.13.29-.34.44-.52.15-.18.19-.31.29-.5.1-.19.05-.38-.02-.53-.07-.14-.63-1.53-.86-2.08-.23-.55-.46-.48-.67-.49-.17-.01-.37-.01-.57-.01-.2 0-.52.07-.79.35-.27.28-1.03 1.01-1.03 2.45s1.06 2.84 1.21 3.04c.15.2 2.09 3.2 5.08 4.49.71.31 1.26.5 1.69.64.71.23 1.36.2 1.88.12.57-.09 1.71-.69 1.95-1.35.24-.66.24-1.23.17-1.35-.07-.12-.26-.19-.55-.33z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-gray-700 py-4 text-center text-sm">
+    © 2025 Pastéis da Ponte Brasil • Todos os direitos reservados
+  </div>
+</footer>
+
+
+<script src="js/main.js" type="module"></script>
+</body>
+</html>
+
+--------------------------------------------------------------------------------
+Fim do arquivo: index.html
+--------------------------------------------------------------------------------
+
+
+================================================================================
+Arquivo: css\style.css
+Formato: .css
+================================================================================
+
+/* -----------------------------------------------------------
+   Ken Burns + cross-fade para 4 banners
+   ----------------------------------------------------------- */
+:root{
+  /* factor >1 garante que a imagem cobre sempre o viewport     */
+  --kb-start: 1.15;   /* escala inicial 115 %                  */
+  --kb-end  : 1.35;   /* escala final   135 %                  */
+  --kb-time : 24s;    /* duração total da animação de cada img */
+}
+
+@keyframes kbZoom {
+  from{ transform: scale(var(--kb-start)) translate(-4%, -4%); }
+  to  { transform: scale(var(--kb-end))   translate( 4%,  4%); }
+}
+
+/* fade in-out escalonado (4 slides → 0–25–50–75 %) ------------*/
+@keyframes kbFade {
+  0%   { opacity:1; }
+  20%  { opacity:1; }
+  25%  { opacity:0; }
+  95%  { opacity:0; }
+  100% { opacity:1; }
+}
+
+.kenburns-slide{
+  position:absolute; inset:0;
+  animation: kbFade var(--kb-time) linear infinite;
+}
+.kenburns-slide img{
+  width:100%; height:100%; object-fit:cover;
+  animation: kbZoom var(--kb-time) ease-in-out infinite alternate;
+}
+
+/* 4 slides com delays de fase -------------------------------*/
+.kenburns-slide:nth-child(1){ animation-delay:   0s; }
+.kenburns-slide:nth-child(2){ animation-delay: 6s;  }
+.kenburns-slide:nth-child(3){ animation-delay:12s;  }
+.kenburns-slide:nth-child(4){ animation-delay:18s;  }
+.kenburns-slide:nth-child(1) img{ animation-delay:   0s; }
+.kenburns-slide:nth-child(2) img{ animation-delay: 6s;  }
+.kenburns-slide:nth-child(3) img{ animation-delay:12s;  }
+.kenburns-slide:nth-child(4) img{ animation-delay:18s;  }
+
+
+--------------------------------------------------------------------------------
+Fim do arquivo: css\style.css
+--------------------------------------------------------------------------------
+
+
+================================================================================
+Arquivo: js\main.js
+Formato: .js
+================================================================================
+
+// js/main.js
+//--------------------------------------------------------------------
+//  Módulos
+//--------------------------------------------------------------------
+import { getAllProducts }                                                from './modules/productCatalog.js';
+import { renderMenu, initMenuEventListeners }                            from './modules/menu.js';
+import { initProductModal }                                              from './modules/productModal.js';
+import { initCart, updateCartIcon, onCartUpdate, getCartSummary }        from './modules/cart.js';
+import { initUIEventListeners }                                          from './modules/ui.js';
+import { generateWhatsAppMessage, updateWhatsAppLinks }                  from './modules/whatsapp.js';
+
+//--------------------------------------------------------------------
+//  Função principal
+//--------------------------------------------------------------------
+function initializeApp () {
+  /* 1 ▸ Produtos --------------------------------------------------- */
+  const products = getAllProducts();
+
+  /* 2 ▸ Menu (cards + click-handlers) ------------------------------ */
+  renderMenu(products);
+  initMenuEventListeners();         // add-to-cart + abrir modal
+
+  /* 3 ▸ Modal de Produto ------------------------------------------ */
+  initProductModal(products);       // preencher / abrir / fechar
+
+  /* 4 ▸ Carrinho --------------------------------------------------- */
+  initCart();                       // cria estrutura + lê localStorage
+  updateCartIcon();                 // nº de itens no sino 🛒
+
+  /* 5 ▸ UI genérica (abrir/fechar carrinho, etc.) ------------------ */
+  initUIEventListeners();
+
+  /* 6 ▸ WhatsApp --------------------------------------------------- */
+  syncWhatsAppLinks();              // primeira geração
+
+  // Sempre que o carrinho mudar → regenerar mensagem + atualizar links
+  onCartUpdate(syncWhatsAppLinks);
+
+  console.info('🚀 Pastéis da Ponte Brasil – app inicializada!');
+}
+
+/* ------------------------------------------------------------------ */
+/* Helper: gera msg WA e injeta nos links de CTA + Checkout           */
+/* ------------------------------------------------------------------ */
+function syncWhatsAppLinks () {
+  const { items, total } = getCartSummary();  // do módulo cart.js
+  const products         = getAllProducts();  // para resolver nomes
+  const message          = generateWhatsAppMessage(items, products, total);
+  updateWhatsAppLinks(message);
+}
+
+/* ------------------------------------------------------------------ */
+/* Dispara inicialização quando DOM estiver pronto                    */
+/* ------------------------------------------------------------------ */
+document.addEventListener('DOMContentLoaded', initializeApp);
+
+
+--------------------------------------------------------------------------------
+Fim do arquivo: js\main.js
+--------------------------------------------------------------------------------
+
+
+================================================================================
+Arquivo: js\modules\cart.js
+Formato: .js
+================================================================================
+
+// js/modules/cart.js
+import { $, $$ }                          from '../utils/domUtils.js';
+import { getProductById, getAllProducts } from './productCatalog.js';
+import { generateWhatsAppMessage,
+         updateWhatsAppLinks }            from './whatsapp.js';
+
+/* -------------------- estado & subscritores ----------------------- */
+let cart        = loadCart();     // [{ id, qty }]
+const watchers  = [];
+
+/* -------------------- API pública --------------------------------- */
+export function initCart () {
+  renderUI();
+}
+
+export function onCartUpdate (cb) {
+  if (typeof cb === 'function') watchers.push(cb);
+}
+
+export function addItemToCart (id, qty = 1) {
+  qty = parseInt(qty);
+  const item = cart.find(i => i.id === id);
+  item ? (item.qty += qty) : cart.push({ id, qty });
+  saveCart(); updateAll();
+}
+
+export function changeItemQty (id, delta) {
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
+  item.qty = Math.max(1, item.qty + delta);
+  saveCart(); updateAll();
+}
+
+export function removeItem (id) {
+  cart = cart.filter(i => i.id !== id);
+  saveCart(); updateAll();
+}
+
+/* (facultativo) expositor para main.js, UI ou limpar após checkout */
+export function clearCart () {
+  cart = []; saveCart(); updateAll();
+}
+
+/* devolve itens + total para WhatsApp ou UI */
+export function getCartSummary () {
+  const items = cart.map(i => ({ ...i }));
+  const total = items.reduce((s, i) => s + i.qty * getProductById(i.id).price, 0);
+  return { items, total };
+}
+
+export function updateCartIcon () {
+  $('#cartCount').textContent = cart.reduce((s, i) => s + i.qty, 0);
+}
+
+/* -------------------- UI interna ---------------------------------- */
+function renderUI () {
+  const cont   = $('#cartItemsContainer');
+  const totalL = $('#cartTotal');
+  if (!cont) return;
+
+  cont.innerHTML = '';
+  let total = 0;
+
+  cart.forEach(i => {
+    const p     = getProductById(i.id);
+    total      += i.qty * p.price;
+
+    cont.insertAdjacentHTML('beforeend', `
+      <div class="flex justify-between items-center">
+        <span>${i.qty}× ${p.name}</span>
+        <div class="flex items-center space-x-2">
+          <button data-act="dec" data-id="${i.id}" class="px-2">−</button>
+          <button data-act="inc" data-id="${i.id}" class="px-2">+</button>
+          <button data-act="del" data-id="${i.id}" class="text-red-600 px-2">&times;</button>
+        </div>
+      </div>
+    `);
+  });
+
+  totalL.textContent = `€${total.toFixed(2)}`;
+
+  /* delegação para botões internos */
+  cont.onclick = ({ target }) => {
+    const btn = target.closest('button[data-act]');
+    if (!btn) return;
+    const id  = parseInt(btn.dataset.id, 10);
+    if (btn.dataset.act === 'inc')      changeItemQty(id, 1);
+    else if (btn.dataset.act === 'dec') changeItemQty(id, -1);
+    else if (btn.dataset.act === 'del') removeItem(id);
+  };
+}
+
+function updateAll () {
+  renderUI();
+  updateCartIcon();
+  fireWatchers();
+  refreshWhatsApp();
+}
+
+function fireWatchers () {
+  const summary = getCartSummary();
+  watchers.forEach(cb => cb(summary));
+}
+
+function refreshWhatsApp () {
+  const { items, total } = getCartSummary();
+  const msg = generateWhatsAppMessage(items, getAllProducts(), total);
+  updateWhatsAppLinks(msg);
+}
+
+/* -------------------- localStorage ------------------------------- */
+function saveCart () {
+  localStorage.setItem('ppb-cart', JSON.stringify(cart));
+}
+function loadCart () {
+  try { return JSON.parse(localStorage.getItem('ppb-cart')) || []; }
+  catch { return []; }
+}
+
+
+--------------------------------------------------------------------------------
+Fim do arquivo: js\modules\cart.js
+--------------------------------------------------------------------------------
+
+
+================================================================================
+Arquivo: js\modules\menu.js
+Formato: .js
+================================================================================
+
+// js/modules/menu.js
+//------------------------------------------------------------
+//  Dependências
+//------------------------------------------------------------
+import { $ }                         from '../utils/domUtils.js';
+import { openProductModal }          from './productModal.js';
+import { addItemToCart, updateCartIcon } from './cart.js';
+
+//------------------------------------------------------------
+//  Elemento-raiz onde os cards serão injectados
+//------------------------------------------------------------
+const menuGrid = $('#menuGrid');   // <div id="menuGrid"> … </div>
+
+//------------------------------------------------------------
+//  Card HTML para um produto
+//------------------------------------------------------------
+function createProductCard (product) {
+  const card           = document.createElement('div');
+  card.className       = 'bg-white rounded-lg shadow hover:shadow-lg transition product-card';
+  card.dataset.productId = product.id;              // facilita event-delegation
+
+  card.innerHTML = `
+    <img src="${product.img}"
+         alt="${product.name} – ${product.desc}"
+         class="w-full h-70 object-cover rounded-t-lg cursor-pointer product-image" />
+
+    <div class="p-4 space-y-3">
+      <h4 class="text-xl font-semibold">${product.name}</h4>
+
+      <div class="flex items-center space-x-3">
+        <label for="qty-${product.id}" class="sr-only">Quantidade</label>
+        <input  id="qty-${product.id}" type="number" min="1" value="1"
+                class="w-20 border px-2 py-1 rounded product-qty" />
+
+        <button class="flex-1 bg-amber-500 hover:bg-amber-600
+                       text-white rounded py-2 add-to-cart-btn">
+          Adicionar
+        </button>
+      </div>
+    </div>
+  `;
+  return card;
+}
+
+//------------------------------------------------------------
+//  Renderiza todos os produtos recebidos
+//------------------------------------------------------------
+export function renderMenu (products = []) {
+  if (!menuGrid) {
+    console.error('[menu.js] #menuGrid não encontrado.');
+    return;
+  }
+  menuGrid.innerHTML = '';           // limpa antes de renderizar
+  products.forEach(p => menuGrid.appendChild(createProductCard(p)));
+}
+
+//------------------------------------------------------------
+//  Delegação de eventos para o grid
+//------------------------------------------------------------
+export function initMenuEventListeners () {
+  if (!menuGrid) return;
+
+  menuGrid.addEventListener('click', (e) => {
+    const target      = e.target;
+    const productCard = target.closest('.product-card');
+    if (!productCard) return;                    // clicou fora de um card
+
+    const productId   = parseInt(productCard.dataset.productId, 10);
+
+    // ── Clique na imagem → abrir modal ──────────────────────
+    if (target.classList.contains('product-image')) {
+      openProductModal(productId);
+      return;
+    }
+
+    // ── Clique no botão “Adicionar” ─────────────────────────
+    if (target.classList.contains('add-to-cart-btn')) {
+      const qtyInput = productCard.querySelector('.product-qty');
+      const quantity = Math.max(1, parseInt(qtyInput.value, 10) || 1);
+
+      addItemToCart(productId, quantity);
+      updateCartIcon();                            // badge 🛒
+
+      // feedback visual rápido
+      target.textContent = 'Adicionado!';
+      target.disabled    = true;
+      setTimeout(() => {
+        target.textContent = 'Adicionar';
+        target.disabled    = false;
+      }, 1200);
+    }
+  });
+}
+
+
+--------------------------------------------------------------------------------
+Fim do arquivo: js\modules\menu.js
+--------------------------------------------------------------------------------
+
+
+================================================================================
+Arquivo: js\modules\productCatalog.js
+Formato: .js
+================================================================================
+
+// js/modules/productCatalog.js
+// ---------------------------------------------------------------------------
+//  Catálogo completo (10 sabores) com campos para a nova modal robusta
+// ---------------------------------------------------------------------------
+
+const products = [
+  /* 1 ─ Leite Ninho® ------------------------------------------------------ */
+  {
+    id        : 1,
+    name      : 'Leite Ninho',
+    price     : 1,
+    img       : './images/Leite_Ninho.png',          // hero
+    images    : [
+      './images/Leite_Ninho_close1.png',
+      './images/Leite_Ninho_close2.png'
+    ],
+    video     : '',                                  // (opcional) YouTube ou mp4
+    teaser    : 'O sabor da infância em massa folhada crocante.',
+    desc      : 'Recheio cremoso feito com leite condensado e generosas porções de Leite Ninho® — doce na medida certa, perfeito para acompanhar um café ou chá.',
+    tech      : 'Peso líquido: 55 g · Validade: 4 dias · Conservar a 4 °C.',
+    ingredients: [
+      'Farinha de trigo', 'Manteiga', 'Leite condensado',
+      'Leite em pó integral', 'Açúcar', 'Sal'
+    ]
+  },
+
+  /* 2 ─ Paçoquita® -------------------------------------------------------- */
+  {
+    id        : 2,
+    name      : 'Paçoquita',
+    price     : 1,
+    img       : './images/Paçoquita.png',
+    images    : [
+      './images/Pacoquita_close1.png',
+      './images/Pacoquita_close2.png'
+    ],
+    video     : 'https://www.youtube.com/embed/xxxxxxx',   // substitua se quiser
+    teaser    : 'Crocante por fora, paçoca cremosa por dentro.',
+    desc      : 'Creme amanteigado de Paçoquita® envolto por massa folhada dourada, finalizado com farofinha crocante de amendoim e um cilindro de paçoca.',
+    tech      : 'Peso: 55 g · Alergénios: amendoim, lactose · Validade: 4 dias.',
+    ingredients: [
+      'Farinha de trigo', 'Manteiga', 'Paçoca (amendoim, açúcar, sal)',
+      'Leite condensado', 'Açúcar', 'Sal'
+    ]
+  },
+
+  /* 3 ─ Brigadeiro -------------------------------------------------------- */
+  {
+    id        : 3,
+    name      : 'Brigadeiro',
+    price     : 1,
+    img       : './images/Pastel_de_Brigadeiro.png',
+    images    : [
+      './images/Brigadeiro_close1.png',
+      './images/Brigadeiro_close2.png'
+    ],
+    video     : '',
+    teaser    : 'Chocolate brasileiro em formato de pastel.',
+    desc      : 'Brigadeiro de panela feito com cacau 50 %, coberto por granulado belga, selado numa massa folhada fina e amanteigada.',
+    tech      : 'Peso: 55 g · Alergénios: leite, soja · Conservar a 4 °C.',
+    ingredients: [
+      'Farinha de trigo', 'Manteiga', 'Leite condensado',
+      'Chocolate em pó 50 %', 'Granulado de chocolate', 'Sal'
+    ]
+  },
+
+  /* 4 ─ Beijinho ---------------------------------------------------------- */
+  {
+    id        : 4,
+    name      : 'Beijinho',
+    price     : 1,
+    img       : './images/Pastel_de_Beijinho.png',
+    images    : [
+      './images/Beijinho_close1.png',
+      './images/Beijinho_close2.png'
+    ],
+    video     : '',
+    teaser    : 'Doce de coco fresco que derrete na boca.',
+    desc      : 'Coco ralado hidratado em leite condensado, toque de cravo-da-índia opcional e cobertura de flocos premium de coco.',
+    tech      : 'Peso: 55 g · Alergénios: lactose · Validade: 4 dias.',
+    ingredients: [
+      'Farinha de trigo', 'Manteiga', 'Leite condensado',
+      'Coco ralado', 'Açúcar', 'Sal', 'Cravo (opcional)'
+    ]
+  },
+
+  /* 5 ─ Doce de Goiaba ---------------------------------------------------- */
+  {
+    id        : 5,
+    name      : 'Doce de Goiaba',
+    price     : 1,
+    img       : './images/Doce_de_Goiaba.png',
+    images    : [
+      './images/Goiaba_close1.png',
+      './images/Goiaba_close2.png'
+    ],
+    video     : '',
+    teaser    : 'Goiabada cremosa artesanal, pura brasilidade.',
+    desc      : 'Goiabada cascão reduzida lentamente até atingir uma textura aveludada, levemente ácida, envolta pela massa folhada.',
+    tech      : 'Peso: 55 g · Sem lactose · Conservar a 4 °C.',
+    ingredients: [
+      'Farinha de trigo', 'Manteiga', 'Goiaba vermelha',
+      'Açúcar', 'Pectina natural', 'Sal', 'Sumo de limão'
+    ]
+  },
+
+  /* 6 ─ Doce de Leite ----------------------------------------------------- */
+  {
+    id        : 6,
+    name      : 'Doce de Leite',
+    price     : 1,
+    img       : './images/Pastel_de_Doce_de_Leite.png',
+    images    : [
+      './images/DoceLeite_close1.png',
+      './images/DoceLeite_close2.png'
+    ],
+    video     : '',
+    teaser    : 'Tradicional doce de leite argentino, textura sedosa.',
+    desc      : 'Doce de leite cozinhado durante 4 horas para atingir cor âmbar intensa; finalizado com pitada de flor de sal para realçar o caramelo natural.',
+    tech      : 'Peso: 55 g · Alergénios: lactose · Validade: 4 dias.',
+    ingredients: [
+      'Farinha de trigo', 'Manteiga', 'Leite integral',
+      'Açúcar', 'Bicarbonato de sódio', 'Flor de sal'
+    ]
+  },
+
+
+  /* 8 ─ Morango em Calda -------------------------------------------------- */
+  {
+    id        : 8,
+    name      : 'Morango em Calda',
+    price     : 1,
+    img       : './images/Morango_em_Calda.png',
+    images    : [
+      './images/Morango_close1.png',
+      './images/Morango_close2.png'
+    ],
+    video     : '',
+    teaser    : 'Morangos frescos, calda rubi e aroma de baunilha.',
+    desc      : 'Cubos de morango marinados em açúcar demerara e sementes de baunilha, cozidos até formar calda brilhante que contrasta com a massa crocante.',
+    tech      : 'Peso: 55 g · Sem lactose · Validade: 3 dias.',
+    ingredients: [
+      'Farinha de trigo', 'Manteiga', 'Morango fresco',
+      'Açúcar demerara', 'Baunilha', 'Sumo de limão', 'Sal'
+    ]
+  },
+
+  /* 9 ─ Tapioca-Coco ------------------------------------------------------ */
+  {
+    id        : 9,
+    name      : 'Tapioca-Coco',
+    price     : 1,
+    img       : './images/Tapioca.png',
+    images    : [
+      './images/Tapioca_close1.png',
+      './images/Tapioca_close2.png'
+    ],
+    video     : '',
+    teaser    : 'Creme leve de tapioca com leite de coco.',
+    desc      : 'Pérolas de tapioca hidratadas em leite de coco e leite fresco, finalizadas com raspas de coco tostado – textura surpreendente e refrescante.',
+    tech      : 'Peso: 55 g · Alergénios: lactose · Conservar a 4 °C.',
+    ingredients: [
+      'Farinha de trigo', 'Manteiga', 'Leite de coco',
+      'Leite integral', 'Tapioca granulada', 'Açúcar', 'Sal'
+    ]
+  },
+
+  /* 10 ─ Maracujá Gourmet ------------------------------------------------- */
+  {
+    id        : 10,
+    name      : 'Maracujá',
+    price     : 1,
+    img       : './images/Maracuja.png',
+    images    : [
+      './images/Maracuja_close1.png',
+      './images/Maracuja_close2.png'
+    ],
+    video     : '',
+    teaser    : 'Curd acidulado de maracujá com sementes crocantes.',
+    desc      : 'Curd artesanal feito com polpa fresca de maracujá, manteiga europeia e gemas pasteurizadas; sementes mantidas para um leve crunch e visual atraente.',
+    tech      : 'Peso: 55 g · Alergénios: lactose, ovo · Validade: 3 dias.',
+    ingredients: [
+      'Farinha de trigo', 'Manteiga', 'Polpa de maracujá',
+      'Açúcar', 'Gema de ovo', 'Sal'
+    ]
+  }
+];
+
+/* ---------------------------------------------------------------------------
+ *  Helpers de acesso
+ * ------------------------------------------------------------------------- */
+export function getAllProducts () {
+  return products;
+}
+
+export function getProductById (id) {
+  return products.find(p => p.id === id);
+}
+
+
+--------------------------------------------------------------------------------
+Fim do arquivo: js\modules\productCatalog.js
+--------------------------------------------------------------------------------
+
+
+================================================================================
+Arquivo: js\modules\productModal.js
+Formato: .js
+================================================================================
+
+// js/modules/productModal.js
+//--------------------------------------------------------------------
+import { $, $$ }              from '../utils/domUtils.js';
+import { getProductById }     from './productCatalog.js';
+import { addItemToCart }      from './cart.js';
+
+//--------------------------------------------------------------------
+//  Seletores
+//--------------------------------------------------------------------
+const els = {
+  modal        : $('#productView'),
+  heroImg      : $('#productModalImg'),
+  galleryWrap  : $('#productModalGalleryWrap'),
+  gallery      : $('#productModalGallery'),
+  videoWrap    : $('#productModalVideoWrap'),
+  video        : $('#productModalVideo'),
+
+  title        : $('#productModalTitle'),
+  teaser       : $('#productModalTeaser'),
+  desc         : $('#productModalDesc'),
+  tech         : $('#productModalTech'),
+  ingredients  : $('#productModalIngredients'),
+
+  qtyInput     : $('#productModalQty'),
+  addBtn       : $('#addProductToCartBtn'),
+  closeBtn     : $('#closeProductBtn')
+};
+
+let currentProductId = null;
+
+//--------------------------------------------------------------------
+//  Renderiza miniaturas
+//--------------------------------------------------------------------
+function renderGallery (imgs = []) {
+  els.gallery.innerHTML = '';
+  imgs.forEach((src, i) => {
+    const thumb = document.createElement('img');
+    thumb.src   = src;
+    thumb.alt   = `${i + 1}`;
+    thumb.className =
+      'w-16 h-16 object-cover rounded-md cursor-pointer border-2 ' +
+      'border-transparent hover:border-amber-500 transition';
+    thumb.onclick = () => (els.heroImg.src = src);
+    els.gallery.appendChild(thumb);
+  });
+}
+
+//--------------------------------------------------------------------
+//  A P I
+//--------------------------------------------------------------------
+export function openProductModal (id) {
+  const p = getProductById(id);
+  if (!p) return;
+
+  currentProductId   = id;
+
+  /* Imagem hero */
+  els.heroImg.src    = p.img;
+  els.heroImg.alt    = p.name;
+
+  /* Mini-galeria */
+  if (p.images && p.images.length) {
+    renderGallery(p.images);
+    els.galleryWrap.classList.remove('hidden');
+  } else {
+    els.galleryWrap.classList.add('hidden');
+  }
+
+  /* Vídeo */
+  if (p.video) {
+    els.video.src = p.video;            // link YouTube emb. ou mp4
+    els.videoWrap.classList.remove('hidden');
+  } else {
+    els.videoWrap.classList.add('hidden');
+  }
+
+  /* Textos */
+  els.title .textContent = p.name;
+  els.teaser.textContent = p.teaser      || '';
+  els.desc  .textContent = p.desc        || '';
+  els.tech  .textContent = p.tech        || '';
+  els.ingredients.textContent =
+    (p.ingredients && p.ingredients.join(', ')) || '';
+
+  /* Quantidade padrão */
+  els.qtyInput.value = 1;
+
+  /* Abre modal */
+  els.modal.classList.remove('hidden');
+}
+
+export function closeProductModal () {
+  els.modal.classList.add('hidden');
+  // pausa vídeo mp4, se estiver em play
+  if (els.video && !els.video.paused) els.video.pause();
+}
+
+//--------------------------------------------------------------------
+//  Event listeners
+//--------------------------------------------------------------------
+function handleAdd () {
+  const qty = Math.max(1, parseInt(els.qtyInput.value, 10) || 1);
+  addItemToCart(currentProductId, qty);
+  closeProductModal();
+}
+
+export function initProductModal () {
+  els.addBtn .onclick = handleAdd;
+  els.closeBtn.onclick = closeProductModal;
+
+  // fecha ao clicar fora da caixa central
+  els.modal.onclick = (e) => {
+    if (e.target === els.modal) closeProductModal();
+  };
+}
+
+
+--------------------------------------------------------------------------------
+Fim do arquivo: js\modules\productModal.js
+--------------------------------------------------------------------------------
+
+
+================================================================================
+Arquivo: js\modules\ui.js
+Formato: .js
+================================================================================
+
+// js/modules/ui.js
+import { $, $$ } from '../utils/domUtils.js';
+
+const cartView    = $('#cartView');
+const cartBtn     = $('#cartBtn');
+const closeCartBtn= $('#closeCartBtn');
+
+function openCart()  { cartView.classList.remove('hidden'); }
+function closeCart() { cartView.classList.add('hidden'); }
+
+export function initUIEventListeners() {
+  cartBtn.addEventListener('click', openCart);
+  closeCartBtn.addEventListener('click', closeCart);
+  // Fecha ao clicar fora do painel
+  cartView.addEventListener('click', (e) => {
+    if (e.target === cartView) closeCart();
+  });
+}
+
+
+--------------------------------------------------------------------------------
+Fim do arquivo: js\modules\ui.js
+--------------------------------------------------------------------------------
+
+
+================================================================================
+Arquivo: js\modules\whatsapp.js
+Formato: .js
+================================================================================
+
+// js/modules/whatsapp.js
+// -------------------------------------------------------------
+// Gera mensagem e liga/actualiza todos os botões de WhatsApp
+// -------------------------------------------------------------
+import { $ } from '../utils/domUtils.js';
+
+const PHONE = '351910000000';          // ⬅️ coloca aqui o nº real (apenas dígitos)
+
+export function generateWhatsAppMessage (cartItems = [], products = [], total = 0) {
+  if (!cartItems.length) return 'Olá! Gostaria de pedir alguns pastéis.';
+
+  const linhas = cartItems.map(i => {
+    const p = products.find(pr => pr.id === i.id) || { name: 'Produto' };
+    return `${i.qty}× ${p.name}`;
+  });
+
+  linhas.push(`Total: €${total.toFixed(2)}`);
+
+  return `Olá! Gostaria de pedir:\n${linhas.join('\n')}`;
+}
+
+/**
+ * Actualiza o href do CTA flutuante (#whatsappCtaBtn)
+ * e liga o click do botão “Finalizar” (#checkoutBtn).
+ * É chamada sempre que o carrinho é alterado.
+ */
+export function updateWhatsAppLinks (message = '') {
+  const link = `https://wa.me/${PHONE}?text=${encodeURIComponent(message)}`;
+
+  /* CTA flutuante (é <a>) */
+  const cta = $('#whatsappCtaBtn');
+  if (cta) cta.href = link;
+
+  /* Botão do carrinho (pode ser <button> ou <a>) */
+  const checkout = $('#checkoutBtn');
+  if (!checkout) return;
+
+  /* Se fores trocar para <a>, basta definir href */
+  if (checkout.tagName.toLowerCase() === 'a') {
+    checkout.href = link;
+  } else {
+    /* Mantendo como <button> — abre a nova janela */
+    checkout.onclick = () => {
+      window.open(link, '_blank');
+      /* (Opcional) limpar carrinho depois do clique:
+         import { clearCart } from './cart.js'; clearCart();
+      */
+    };
+  }
+}
+
+
+--------------------------------------------------------------------------------
+Fim do arquivo: js\modules\whatsapp.js
+--------------------------------------------------------------------------------
+
+
+================================================================================
+Arquivo: js\utils\domUtils.js
+Formato: .js
+================================================================================
+
+// js/utils/domUtils.js
+export function $(selector, parent = document) {
+  return parent.querySelector(selector);
+}
+
+export function $$(selector, parent = document) {
+  return Array.from(parent.querySelectorAll(selector));
+}
+
+--------------------------------------------------------------------------------
+Fim do arquivo: js\utils\domUtils.js
+--------------------------------------------------------------------------------
+
+
